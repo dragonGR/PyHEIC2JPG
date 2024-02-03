@@ -50,7 +50,7 @@ def convert_heic_to_jpg(heic_dir):
         except Exception as e:
             logging.error(f"Error converting {file_name}: {str(e)}")
 
-    print("\nConversion completed successfully. {num_converted} files converted.")
+    print(f"\nConversion completed successfully. {num_converted} files converted.")
 
 # Provide the directory path containing the HEIC files
 heic_directory = "/path/to/heic"
