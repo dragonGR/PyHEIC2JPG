@@ -2,6 +2,7 @@ import os
 import logging
 import pyheif
 from PIL import Image
+from sys import argv
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
@@ -41,7 +42,7 @@ def convert_heic_to_jpg(heic_dir):
 
             # Save the image as JPG
             with open(jpg_path, "wb") as jpg_file:
-                image.save(jpg_file, "JPEG", quality=100)
+                image.save(jpg_file, "JPEG", quality=50)
                 num_converted += 1
 
             # Calculate and display the percentage progress
@@ -53,7 +54,7 @@ def convert_heic_to_jpg(heic_dir):
     print(f"\nConversion completed successfully. {num_converted} files converted.")
 
 # Provide the directory path containing the HEIC files
-heic_directory = "/path/to/heic"
+heic_directory = argv[1]
 
 # Convert HEIC to JPG
 convert_heic_to_jpg(heic_directory)
