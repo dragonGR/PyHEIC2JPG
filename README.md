@@ -1,23 +1,39 @@
 # HEIC to JPG Converter
 
-This Python script converts HEIC (High-Efficiency Image Format) files to JPG format while preserving the image quality. It utilizes the Pillow library along with the pyheif library for handling HEIC files.
+This Python script efficiently converts HEIC (High-Efficiency Image Format) files to JPG format, offering enhanced features and user experience.
+
+## Key Improvements
+- Command-Line Interface (CLI): Interact with the script directly using command-line arguments for easier execution and fine-tuning.
+- Optimized Image Processing: Leverages the ``pillow-heif`` library for efficient HEIC processing.
+- Improved Error Handling: More robust error management ensures smoother execution.
+- Progress Tracking: Track the conversion progress for large file sets.
+- Enhanced Folder Management: Confirms user intent before potentially overwriting existing output directories.
 
 ## What This Code Does ?
 
-This code allows you to convert multiple HEIC files to JPG format with ease. It automatically creates a directory to store the converted JPG files and maintains the original image quality during the conversion process. The script uses the pyheif library to read HEIC files and the Pillow library to save the images as JPG files.
+This script allows you to seamlessly convert multiple HEIC files into JPG format with granular control.
 
-## Usage
+- Automated Output Directory: Creates a dedicated folder named "ConvertedFiles" within the HEIC directory to store the converted JPGs.
+- Quality Control: Specify the desired JPG image quality using the `-q` or `--quality` argument when running the script.
 
-1. Install the required dependencies: `pip install pillow pyheif`
-2. Clone or download this repository.
-3. Provide the directory path containing the HEIC files in the script.
-4. Run the script to convert HEIC files to JPG format.
+## Installation
+
+1. Install the required dependency: `pip install pillow-heif`
+2. Run the Script:
+```bash
+python heic_to_jpg.py <path/to/your/heic/directory>  # Replace with actual path
+python heic_to_jpg.py -q 90 <path/to/your/heic/directory>  # Set JPG quality (1-100)
+```
 
 ## Features
 
-- Converts multiple HEIC files to JPG format.
-- Maintains the original image quality.
-- Supports batch conversion.
-- Easy to use and configure.
+- User-friendly CLI for efficient conversion.
+- Optimized HEIC processing for faster performance.
+- Robust error handling for a smooth user experience.
+- Informative progress tracking.
+- Flexible output directory management.
+- Quality control for JPG output.
 
-Feel free to customize the script to suit your specific requirements.
+This script provides a versatile and efficient solution for converting HEIC images to JPG format.
+
+Feel free to customize the script further based on your specific needs!
