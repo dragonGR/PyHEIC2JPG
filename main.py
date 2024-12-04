@@ -1,44 +1,46 @@
 import os
 import logging
-from PIL import Image, UnidentifiedImageError
-from pillow_heif import register_heif_opener
-from sys import argv
 import argparse
 import shutil
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from PIL import Image, UnidentifiedImageError
+from pillow_heif import register_heif_opener
 
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-def convert_single_file(heic_path, jpg_path, output_quality):
+def convert_single_file(heic_path, jpg_path, output_quality) -> tuple:
     """
     Convert a single HEIC file to JPG format.
     
-    Args:
-        heic_path (str): Path to the HEIC file.
-        jpg_path (str): Path to save the converted JPG file.
-        output_quality (int): Quality of the output JPG image.
+    #### Args:
+        - heic_path (str): Path to the HEIC file.
+        - jpg_path (str): Path to save the converted JPG file.
+        - output_quality (int): Quality of the output JPG image.
+
+    #### Returns:
+        - tuple: Path to the HEIC file and conversion status.
     """
     try:
         with Image.open(heic_path) as image:
             image.save(jpg_path, "JPEG", quality=output_quality)
         return heic_path, True  # Successful conversion
     except (UnidentifiedImageError, FileNotFoundError, OSError) as e:
-        logging.error(f"Error converting '{heic_path}': {e}")
+        logging.error("Error converting '%s': %s", heic_path, e)
         return heic_path, False  # Failed conversion
 
-def convert_heic_to_jpg(heic_dir, output_quality=50, max_workers=4):
+def convert_heic_to_jpg(heic_dir, output_quality=50, max_workers=4) -> None:
     """
     Converts HEIC images in a directory to JPG format using parallel processing.
 
-    Args:
-        heic_dir (str): Path to the directory containing HEIC files.
-        output_quality (int, optional): Quality of the output JPG images (1-100). Defaults to 50.
-        max_workers (int, optional): Number of parallel threads. Defaults to 4.
+    #### Args:
+        - heic_dir (str): Path to the directory containing HEIC files.
+        - output_quality (int, optional): Quality of the output JPG images (1-100). Defaults to 50.
+        - max_workers (int, optional): Number of parallel threads. Defaults to 4.
     """
     register_heif_opener()
 
     if not os.path.isdir(heic_dir):
-        logging.error(f"Directory '{heic_dir}' does not exist.")
+        logging.error("Directory '%s' does not exist.", heic_dir)
         return
 
     # Create a directory to store the converted JPG files
@@ -68,7 +70,7 @@ def convert_heic_to_jpg(heic_dir, output_quality=50, max_workers=4):
 
         # Skip conversion if the JPG already exists
         if os.path.exists(jpg_path):
-            logging.info(f"Skipping '{file_name}' as the JPG already exists.")
+            logging.info("Skipping '%s' as the JPG already exists.", file_name)
             continue
 
         tasks.append((heic_path, jpg_path))
@@ -91,7 +93,7 @@ def convert_heic_to_jpg(heic_dir, output_quality=50, max_workers=4):
                 progress = int((num_converted / total_files) * 100)
                 print(f"Conversion progress: {progress}%", end="\r", flush=True)
             except Exception as e:
-                logging.error(f"Error occurred during conversion of '{heic_file}': {e}")
+                logging.error("Error occurred during conversion of '%s': %s", heic_file, e)
 
     print(f"\nConversion completed successfully. {num_converted} files converted.")
 
