@@ -23,6 +23,9 @@ def convert_single_file(heic_path, jpg_path, output_quality) -> tuple:
     try:
         with Image.open(heic_path) as image:
             image.save(jpg_path, "JPEG", quality=output_quality)
+        # Preserve the original access and modification timestamps
+        heic_stat = os.stat(heic_path)
+        os.utime(jpg_path, (heic_stat.st_atime, heic_stat.st_mtime))
         return heic_path, True  # Successful conversion
     except (UnidentifiedImageError, FileNotFoundError, OSError) as e:
         logging.error("Error converting '%s': %s", heic_path, e)
