@@ -1,6 +1,6 @@
 # HEIC to JPG Converter
 
-This Python script efficiently converts HEIC (High-Efficiency Image Format) files to JPG format, now with parallel processing for faster conversions and enhanced user experience.
+This Python script efficiently converts HEIC (High-Efficiency Image Format) files to JPG format, now with parallel processing for faster conversions, enhanced user experience, and automatic preservation of EXIF metadata.
 
 ## Key Improvements
 - Parallel Processing: Utilizes ``ThreadPoolExecutor`` for concurrent conversion of HEIC files, improving the speed of batch conversions.
@@ -10,6 +10,7 @@ This Python script efficiently converts HEIC (High-Efficiency Image Format) file
 - Progress Tracking: Track the conversion progress for large file sets.
 - Enhanced Folder Management: Confirms user intent before potentially overwriting existing output directories.
 - Quality Control: Customize the output JPG quality (1-100) with a simple command-line option.
+- EXIF Metadata Preservation: Retains important metadata such as camera details, timestamps, and location information in the converted JPG files.
 
 ## What this code does ?
 
@@ -17,6 +18,7 @@ This script allows you to seamlessly convert multiple HEIC files into JPG format
 - Automated Output Directory: Creates a dedicated folder named "ConvertedFiles" within the HEIC directory to store the converted JPGs.
 - Parallel Conversion: Process multiple files simultaneously by specifying the number of workers using the ``-w`` argument.
 - Quality Control: Specify the desired JPG image quality using the ``-q``  argument.
+- EXIF Metadata Preservation: Automatically extracts and includes metadata from HEIC files into the output JPGs.
 - Error Handling: Skips individual files that encounter errors without halting the entire process.
 
 ## Installation
@@ -50,5 +52,6 @@ python main.py -q 90 -w 8 <path/to/your/heic/directory>
 - Informative progress tracking.
 - Flexible output directory management.
 - Quality control for JPG output.
+- EXIF Metadata Preservation: Retains critical metadata like camera details, timestamps, and location data in the converted files.
 
 This script provides a highly efficient and flexible solution for converting HEIC images to JPG format, making it ideal for both small and large-scale conversions.
