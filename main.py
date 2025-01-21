@@ -1,3 +1,10 @@
+# /// script
+# dependencies = [
+#   "pillow==11.0.0",
+#   "pillow_heif==0.18.0",
+# ]
+# ///
+
 import os
 import logging
 import argparse
